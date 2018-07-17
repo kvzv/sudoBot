@@ -20,7 +20,7 @@ class Profile:
         """Profile command ( see 'sudo help profile' for more info )"""
 
         if ctx.invoked_subcommand is None:
-            await ctx.send('Invalid profile command passed... Send `sudo help profile` for assistance.')
+            await ctx.send('🌶 Niewlasciwa komenda. Uzyj `sudo help profile` aby uzyskac pomoc.')
 
 
     @profile.command(pass_context=True)
@@ -156,14 +156,14 @@ class Profile:
     @profile.command(pass_context=True)
     async def setup(self, ctx):
         """Set your user profile card."""
-        await ctx.send('Sending a PM to setup profile card.')
+        await ctx.send('🌶 Wysylam wiadomosc konfiguracyjna...')
 
         questions = self.config["profile_questions"]
         answers = {}
 
         recipient = ctx.message.author
 
-        await recipient.send("Hello! I'm here to help you set up your profile. I will ask you a few questions that you may answer. If you don't want to answer the question, you may reply with 'skip' to move on.")
+        await recipient.send("Witaj! Przybywam, aby pomoc skonfigurowac Ci profil. Zadam ci pare pytan, na ktore mozesz odpowiedziec. Jezeli nie chcesz na ktores odpowiedziec, odpowiedz 'skip' aby je pominac.")
 
         for x, question in enumerate(questions):
             await recipient.send(question)
@@ -184,7 +184,7 @@ class Profile:
         with open('data/users/profiles/{}.dat'.format(recipient.id), 'w', encoding='utf8') as f:
             json.dump(answers, f)
         
-        return await recipient.send('You have completed your profile setup')
+        return await recipient.send('Jej! Pomyslnie ukonczyles setup! :sweat_smile: ')
 
     @profile.command(pass_context=True)
     async def wallpaper(self, ctx, *, url=""):
@@ -197,7 +197,7 @@ class Profile:
             background = url
 
             if (background == ""):
-                return await ctx.send('```Image or URL not found.```')
+                return await ctx.send('```...Plik nie istnieje :fearful: ```')
 
         user = ctx.message.author
         async with aiohttp.ClientSession() as session:
@@ -211,11 +211,11 @@ class Profile:
 
             if(isImage == 'png' or isImage == 'jpeg' or isImage == 'jpg' or isImage == 'gif'):
                 f.close()
-                return await ctx.send('```Successfully set profile wallpaper```')
+                return await ctx.send('```🌶 Pomyslnie ustawiono tlo profilu! :sweat_smile: ```')
             else:
                 f.close()
                 os.remove('data/users/backgrounds/{0}.png'.format(user.id))
-                return await ctx.send('```Something went wrong when setting your wallpaper. Perhaps the file you sent wasn\'t an image?```')
+                return await ctx.send('```Cos sie zjebalo :fearful: Czy na pewno wyslales obrazek?```')
 
 
 def setup(client):
