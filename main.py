@@ -53,11 +53,12 @@ async def on_error(event, *args, **kwargs):
 
 @client.event
 async def on_ready():
-    print('Successfully logged in.')
-    print('Username -> ' + client.user.name)
-    print('ID -> ' + str(client.user.id))
-    print('Admin Users -> ' + str(config['owner_ids']))
-    print('Command prefix -> ' + prefix)
+    print('Pepper initialized.')
+    print('Version running: p2.0')
+    print('UN -> ' + client.user.name)
+    print('DID -> ' + str(client.user.id))
+    print('Admins -> ' + str(config['owner_ids']))
+    print('Prefix -> ' + prefix)
     
 @client.command()
 async def uptime(ctx):
@@ -68,7 +69,7 @@ async def uptime(ctx):
 @client.command()
 async def source(ctx):
     """Post a link to the bot source code."""
-    source = "https://github.com/XNBlank/sudoBot"
+    source = "https://github.com/kvzvn/sudoBot"
     await ctx.send(source)
 
 def ready(client, config):
