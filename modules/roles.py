@@ -16,7 +16,7 @@ class Roles:
         """List available joinable user roles."""
         _rolesList = '\n'.join(map(str, self.config["user_roles"]))
 
-        return await ctx.send('```List of available roles\n' + _rolesList + '\n```')
+        return await ctx.send('```🌶 Dostepne rangi:\n' + _rolesList + '\n```')
 
     @commands.command(pass_context=True)
     async def joindistro(self, ctx, *, distro : str):
@@ -24,8 +24,8 @@ class Roles:
         server = ctx.message.guild
         member = ctx.message.author
 
-        if distro.lower() == 'redhat':
-            distro = 'Red Hat'
+        if distro.lower() == 'debian':
+            distro = 'Debian'
 
         roles = self.config["user_roles"]
 
@@ -41,21 +41,21 @@ class Roles:
         if distro.lower() in map(str.lower, serverRoles):
             if distro.lower() in map(str.lower, roles):
                 if distro.lower() in map(str.lower, memberRoles):
-                    return await ctx.send("You're already in that role.")
+                    return await ctx.send("🌶 Juz posiadasz ta range.")
                 else:
                     try:
                         lowarr = [item.lower() for item in serverRoles]
                         index = lowarr.index(distro.lower())
                         newrole = discord.utils.get(ctx.message.guild.roles, name=serverRoles[index])
-                        await member.add_roles(newrole, reason="Added by user command.")
+                        await member.add_roles(newrole, reason="Pepper: 🌶 Dodane przez uzytkownika.")
                         return await ctx.send("Added {} to group {}.".format(member.display_name, newrole.name))
                     except Exception as e:
                         raise Exception(e)
                         return
             else:
-                return await ctx.send("That role doesn't exist.")
+                return await ctx.send("🌶 Taka ranga nie istnieje :fearful:")
         else:
-            return await ctx.send("That role doesn't exist.")
+            return await ctx.send("🌶 Taka ranga nie istnieje :fearful:")
 
 
     @commands.command(pass_context=True)
@@ -91,7 +91,7 @@ class Roles:
                     embed.add_field(name = "Color (RGB)", value = "({},{},{})".format(thisrole.colour.r, thisrole.colour.g, thisrole.colour.b))
                     return await ctx.send(embed = embed) 
             else:
-                return await ctx.send("That role doesn't exist or is not a public role.")
+                return await ctx.send("🌶 Taka ranga nie istnieje (lub nie jest publiczna) :fearful:")
         else:
             stats = []
             string = ""
@@ -118,8 +118,8 @@ class Roles:
         server = ctx.message.guild
         member = ctx.message.author
 
-        if distro.lower() == 'redhat':
-            distro = 'Red Hat'
+        if distro.lower() == 'debian':
+            distro = 'Debian'
 
         roles = self.config["user_roles"]
 
@@ -139,17 +139,17 @@ class Roles:
                         lowarr = [item.lower() for item in serverRoles]
                         index = lowarr.index(distro.lower())
                         deletedrole = discord.utils.get(ctx.message.guild.roles, name=serverRoles[index])
-                        await member.remove_roles(deletedrole, reason="Removed by user command.")
-                        return await ctx.send("Removed {} from group {}.".format(member.display_name, deletedrole.name))
+                        await member.remove_roles(deletedrole, reason="Pepper: 🌶 Usunieto przez uzytkownika.")
+                        return await ctx.send("🌶 Wyrzucono {} z grupy {}.".format(member.display_name, deletedrole.name))
                     except Exception as e:
                         raise Exception(e)
                         return
                 else:
-                    return await ctx.send("You're not in that role.")
+                    return await ctx.send("🌶 Nie posiadasz tej rangi.")
             else:
-                return await ctx.send("That role doesn't exist.")
+                return await ctx.send("🌶 Taka ranga nie istnieje :fearful:")
         else:
-            return await ctx.send("That role doesn't exist.")
+            return await ctx.send("🌶 Taka ranga nie istnieje :fearful:")
 
 def setup(client):
     client.add_cog(Roles(client, client.config))
