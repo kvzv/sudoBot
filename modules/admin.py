@@ -33,7 +33,7 @@ class Admin:
     @load.error
     async def load_error(self, ctx, error):
         if isinstance(error, commands.CheckFailure):
-            await ctx.send("{} is not in the sudoers file. This incident will be reported.".format(ctx.author.display_name))
+            await ctx.send("🌶 {} is not in the sudoers file. This incident will be reported.".format(ctx.author.display_name))
 
     @commands.command(hidden=True, pass_context=True)
     @commands.check(is_owner)
@@ -45,12 +45,12 @@ class Admin:
         except (AttributeError, ImportError) as e:
             raise Exception(e)
             return
-        await ctx.send("{} reloaded.".format(extension_name))
+        await ctx.send("🌶 {} reloaded.".format(extension_name))
 
     @reload.error
     async def reload_error(self, ctx, error):
         if isinstance(error, commands.CheckFailure):
-            await ctx.send("{} is not in the sudoers file. This incident will be reported.".format(ctx.author.display_name))
+            await ctx.send("🌶 {} is not in the sudoers file. This incident will be reported.".format(ctx.author.display_name))
 
     @commands.command(hidden=True, pass_context=True)
     @commands.check(is_owner)
@@ -80,26 +80,26 @@ class Admin:
         except (AttributeError, ImportError) as e:
             raise Exception(e)
             return
-        await ctx.send("config reloaded.")
+        await ctx.send("🌶 config reloaded.")
 
     @reloadconf.error
     async def reloadconf_error(self, ctx, error):
         if isinstance(error, commands.CheckFailure):
-            await ctx.send("{} is not in the sudoers file. This incident will be reported.".format(ctx.author.display_name))
+            await ctx.send("{🌶 } is not in the sudoers file. This incident will be reported.".format(ctx.author.display_name))
 
     @commands.command(hidden=True, pass_context=True)
     @commands.check(is_owner)
     async def unload(self, ctx, extension_name : str):
         """Unloads an extension."""
         if extension_name.lower() == 'modules.admin':
-            return await ctx.send("Cannot unload essential module : {}".format(extension_name))
+            return await ctx.send("🌶 Cannot unload essential module : {}".format(extension_name))
         self.client.unload_extension(extension_name)
         await ctx.send("{} unloaded.".format(extension_name))
 
     @unload.error
     async def unload_error(self, ctx, error):
         if isinstance(error, commands.CheckFailure):
-            await ctx.send("{} is not in the sudoers file. This incident will be reported.".format(ctx.author.display_name))
+            await ctx.send("🌶 {} is not in the sudoers file. This incident will be reported.".format(ctx.author.display_name))
 
 def setup(client):
     client.add_cog(Admin(client, client.config))
